@@ -1,4 +1,4 @@
-<?php
+<?hh //strict
 
 namespace Quadtree\Geometry;
 
@@ -7,64 +7,38 @@ namespace Quadtree\Geometry;
  */
 class Point
 {
-    /** @var float */
-    private $left;
+    //private Bounds $bounds;
     
-    /** @var float */
-    private $top;
+    public function __construct(private float $left, private float $top) {}
     
-    /** @var Bounds */
-    private $bounds;
-    
-    /**
-     * @param float $left
-     * @param float $top
-     */
-    function __construct($left, $top)
-    {
-        if (!is_numeric($left) || !is_numeric($top) ) {
-            throw new \InvalidArgumentException('Input must be numeric');
-        }
-        $this->left = (float)$left;
-        $this->top = (float)$top;
-    }
-    
-    /**
-     * @return float
-     */
-    function getLeft()
+    public function getLeft() : float
     {
         return $this->left;
     }
 
-    /**
-     * @return float
-     */
-    function getTop()
+    public function getTop() : float
     {
         return $this->top;
     }
     
     /**
      * Comparison function
-     * @param \Quadtree\Point $point
-     * @return boolean
      */
-    public function equals(Point $point)
+    public function equals(Point $point) : bool
     {
         return $this->left === $point->getLeft() && $this->top === $point->getTop();
     }
     
-    /**
-     * Get 2D envelope
-     * @return Bounds
-     */
-    public function getBounds()
-    {
-        if ($this->bounds === NULL) {
-            $this->bounds = new Bounds(0, 0, $this->left, $this->top);
-        }
-        return $this->bounds;
-    }
+    // /**
+    //  * Get 2D envelope
+    //  * @return Bounds
+    //  */
+    // public function getBounds()
+    // {
+    //     if ($this->bounds === NULL) {
+    //         $this->bounds = new Bounds(0, 0, $this->left, $this->top);
+    //     }
+    //     return $this->bounds;
+    // }
 
 }
