@@ -5,7 +5,7 @@ namespace Quadtree\Geometry;
 /**
  * A point on a two-dimensional plane
  */
-class Point
+class Point implements \Quadtree\Insertable
 {
 	private ?Bounds $bounds;
 	

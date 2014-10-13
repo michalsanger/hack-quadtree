@@ -5,7 +5,7 @@ namespace Quadtree\Geometry;
 /**
  * A Bounds represents a rectangle on a two-dimensional plane
  */
-class Bounds //implements \Quadtree\Insertable
+class Bounds implements \Quadtree\Insertable
 {   
 	public function __construct(
 		private float $width, 
