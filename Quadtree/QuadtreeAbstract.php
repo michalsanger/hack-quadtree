@@ -7,11 +7,11 @@ use Quadtree\Geometry\Bounds;
 abstract class QuadtreeAbstract
 {
     const CAPACITY = 4;
-    
+
     private int $capacity;
-    
+
     private array<Insertable> $items = [];
-    
+
     private QuadtreeAbstract $nw;
 
     private QuadtreeAbstract $ne;
@@ -19,16 +19,16 @@ abstract class QuadtreeAbstract
     private QuadtreeAbstract $sw;
 
     private QuadtreeAbstract $se;
-    
+
     public function __construct(
-        private ICollisionDetector $detector, 
+        private ICollisionDetector $detector,
         private Geometry\Bounds $bounds,
         ?int $leafCapacity
     )
     {
         $this->capacity = is_null($leafCapacity) ? static::CAPACITY : $leafCapacity;
     }
-    
+
     public function insert(Insertable $item) : bool
     {
         if (!$this->detector->intersects($this->bounds, $item)) {
@@ -37,7 +37,7 @@ abstract class QuadtreeAbstract
         if ($this->detector->collide($this->items, $item)) {
             return false;
         }
-        
+
         if ($this->nw === null && count($this->items) < $this->capacity) {
             $this->items[] = $item;
             return true;
@@ -52,7 +52,7 @@ abstract class QuadtreeAbstract
             return $nwIn || $neIn || $swIn || $seIn;
         }
     }
-    
+
     /**
      * Number of levels in the tree
      */
@@ -77,7 +77,7 @@ abstract class QuadtreeAbstract
             return $this->nw->getSize() + $this->ne->getSize() + $this->sw->getSize() + $this->se->getSize();
         }
     }
-    
+
     private function subdivide() : void
     {
         list($this->nw, $this->ne, $this->sw, $this->se) = $this->getDividedBounds();
@@ -95,7 +95,7 @@ abstract class QuadtreeAbstract
         $c = $this->bounds->getCenter();
         $width = $this->bounds->getWidth() / 2;
         $height = $this->bounds->getHeight() / 2;
-        
+
         // $nw = new static(new Bounds($width, $height, $c->getLeft() - $width, $c->getTop() - $height), $this->capacity);
         // $ne = new static(new Bounds($width, $height, $c->getLeft(), $c->getTop() - $height), $this->capacity);
         // $sw = new static(new Bounds($width, $height, $c->getLeft() - $width, $c->getTop()), $this->capacity);

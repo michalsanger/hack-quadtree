@@ -8,9 +8,9 @@ namespace Quadtree\Geometry;
 class Point implements \Quadtree\Insertable
 {
 	private ?Bounds $bounds;
-	
+
 	public function __construct(private float $left, private float $top) {}
-	
+
 	public function getLeft() : float
 	{
 		return $this->left;
@@ -20,7 +20,7 @@ class Point implements \Quadtree\Insertable
 	{
 		return $this->top;
 	}
-	
+
 	/**
 	 * Comparison function
 	 */
@@ -28,7 +28,7 @@ class Point implements \Quadtree\Insertable
 	{
 		return $this->left === $point->getLeft() && $this->top === $point->getTop();
 	}
-	
+
 	/**
 	 * Get 2D envelope
 	 */

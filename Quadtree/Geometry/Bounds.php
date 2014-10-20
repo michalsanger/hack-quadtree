@@ -6,14 +6,14 @@ namespace Quadtree\Geometry;
  * A Bounds represents a rectangle on a two-dimensional plane
  */
 class Bounds implements \Quadtree\Insertable
-{   
+{
 	public function __construct(
-		private float $width, 
-		private float $height, 
+		private float $width,
+		private float $height,
 		private float $left = 0.0,
 		private float $top = 0.0
 	){}
-	
+
 	public function getWidth() : float
 	{
 		return $this->width;
@@ -33,7 +33,7 @@ class Bounds implements \Quadtree\Insertable
 	{
 		return $this->top;
 	}
-	
+
 	/**
 	 * Returns true if the given point is in this bounds
 	 */
@@ -43,7 +43,7 @@ class Bounds implements \Quadtree\Insertable
 		$topIn = $point->getTop() >= $this->top && $point->getTop() < ($this->top + $this->height);
 		return $leftIn && $topIn;
 	}
-	
+
 	/**
 	 * Computes the center of this bounds
 	 */
@@ -53,7 +53,7 @@ class Bounds implements \Quadtree\Insertable
 		$top = $this->top + ($this->height / 2);
 		return new Point($left, $top);
 	}
-	
+
 	/**
 	 * Returns true if this bounds shares any points with other bounds
 	 */
@@ -64,7 +64,7 @@ class Bounds implements \Quadtree\Insertable
 			&& $this->top <= $other->getTop() + $other->getHeight()
 			&& $other->getTop() <= $this->top + $this->height;
 	}
-	
+
 	/**
 	 * Returns the intersection of two bounds
 	 */
@@ -89,7 +89,7 @@ class Bounds implements \Quadtree\Insertable
 	{
 		return $this;
 	}
-	
+
 	/**
 	 * Calculate size of area
 	 */
@@ -97,7 +97,7 @@ class Bounds implements \Quadtree\Insertable
 	{
 		return $this->width * $this->height;
 	}
-	
+
 	/**
 	 * Comparison function
 	 */
